@@ -53,7 +53,6 @@ class _MainScreenState extends State<MainScreen> {
         stream: Auth.getUser(widget.firebaseUser.uid),
         builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
           if (!snapshot.hasData) {
-            _checkUserExist(widget.firebaseUser);
             return Center(
               child: CircularProgressIndicator(
                 valueColor: new AlwaysStoppedAnimation<Color>(
@@ -90,25 +89,5 @@ class _MainScreenState extends State<MainScreen> {
 
   void _logOut() async {
     Auth.signOut();
-  }
-
-  void _checkUserExist(FirebaseUser user) async {
-    if (user.displayName != null) {
-      Auth.checkUserExist(user.uid).then((exist) {
-        if (!exist) {
-          _addUser(widget.firebaseUser);
-        }
-      });
-    }
-  }
-
-  void _addUser(FirebaseUser firebaseUser) async {
-    User user = new User(
-        firstName: firebaseUser.displayName,
-        userID: firebaseUser.uid,
-        email: firebaseUser.email,
-        profilePictureURL:
-            firebaseUser.photoUrl == null ? '' : firebaseUser.photoUrl);
-    Auth.addUser(user);
   }
 }

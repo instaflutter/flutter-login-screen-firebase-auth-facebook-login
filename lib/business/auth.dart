@@ -34,7 +34,7 @@ class Auth {
     return user;
   }
 
-  static void addUser(User user) {
+  static void addUser(User user) async {
     checkUserExist(user.userID).then((value) {
       if (!value) {
         print("user ${user.firstName} ${user.email} added");

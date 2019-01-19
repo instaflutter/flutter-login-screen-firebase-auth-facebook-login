@@ -6,6 +6,7 @@ import 'package:onboarding_flow/business/validator.dart';
 import 'package:flutter/services.dart';
 import 'package:onboarding_flow/ui/widgets/custom_flat_button.dart';
 import 'package:onboarding_flow/ui/widgets/custom_alert_dialog.dart';
+import 'package:onboarding_flow/models/user.dart';
 
 class SignInScreen extends StatefulWidget {
   _SignInScreenState createState() => _SignInScreenState();
@@ -204,8 +205,18 @@ class _SignInScreenState extends State<SignInScreen> {
           .logInWithReadPermissions(['email', 'public_profile']);
       switch (result.status) {
         case FacebookLoginStatus.loggedIn:
-          Auth.signInWithFacebok(result.accessToken.token)
-              .then((uid) => Navigator.of(context).pop());
+          Auth.signInWithFacebok(result.accessToken.token).then((uid) {
+            Auth.getCurrentFirebaseUser().then((firebaseUser) {
+              User user = new User(
+                firstName: firebaseUser.displayName,
+                userID: firebaseUser.uid,
+                email: firebaseUser.email ?? '',
+                profilePictureURL: firebaseUser.photoUrl ?? '',
+              );
+              Auth.addUser(user);
+              Navigator.of(context).pop();
+            });
+          });
           break;
         case FacebookLoginStatus.cancelledByUser:
         case FacebookLoginStatus.error:
