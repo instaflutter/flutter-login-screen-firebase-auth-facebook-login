@@ -7,17 +7,23 @@ import 'package:onboarding_flow/ui/widgets/custom_flat_button.dart';
 class WalkthroughScreen extends StatefulWidget {
   final SharedPreferences prefs;
   final List<Walkthrough> pages = [
-    Walkthrough(
-      icon: Icons.notifications_none,
-      title: "Push Notifications",
+  Walkthrough(
+      icon: Icons.developer_mode,
+      title: "Flutter Onboarding",
       description:
-          "Recieve notifications with new restourants, reviews or photos.",
+          "Build your onboarding flow in seconds.",
     ),
-    Walkthrough(
-      icon: Icons.playlist_add,
-      title: "Add New Places",
-      description: "Allow users to add new places.",
-    ),
+  Walkthrough(
+    icon: Icons.layers,
+    title: "Firebase Auth",
+    description: "Use Firebase for user management.",
+  ),
+  Walkthrough(
+    icon: Icons.account_circle,
+    title: "Facebook Login",
+    description:
+        "Leverage Facebook to log in user easily.",
+  ),
   ];
 
   WalkthroughScreen({this.prefs});
@@ -117,9 +123,25 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Icon(
-                Icons.check_circle_outline,
+                Icons.code,
                 size: 125.0,
                 color: Colors.white,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 50.0, right: 15.0, left: 15.0),
+                child: Text(
+                  "Jump straight into the action.",
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    decoration: TextDecoration.none,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "OpenSans",
+                  ),
+                ),
               ),
               Padding(
                 padding:

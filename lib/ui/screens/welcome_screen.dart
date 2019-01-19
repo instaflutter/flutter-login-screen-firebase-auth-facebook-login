@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 60.0),
             child: Icon(
-              Icons.place,
+              Icons.phone_iphone,
               color: Color.fromRGBO(212, 20, 15, 1.0),
               size: 125.0,
             ),
@@ -18,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 35.0, right: 15.0, left: 15.0),
             child: Text(
-              "Say Hello to your new app!",
+              "Say Hello To Your New App!",
               softWrap: true,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -33,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Text(
-              "Find places & bussiness around you.",
+              "You've just saved a week of development and headaches.",
               softWrap: true,
               textAlign: TextAlign.center,
               style: TextStyle(
