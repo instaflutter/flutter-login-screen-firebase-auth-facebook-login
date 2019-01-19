@@ -1,3 +1,5 @@
+.packages
+.flutter-plugins
 ios/Flutter/Flutter.framework
 ios/Flutter/App.framework
 ios/Runner.xcworkspace/xcuserdata
