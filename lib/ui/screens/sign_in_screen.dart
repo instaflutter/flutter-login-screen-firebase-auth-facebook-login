@@ -87,7 +87,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 40.0),
+                          vertical: 14.0, horizontal: 40.0),
                       child: CustomFlatButton(
                         title: "Log In",
                         fontSize: 22,
@@ -122,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 40.0),
+                          vertical: 14.0, horizontal: 40.0),
                       child: CustomFlatButton(
                         title: "Facebook Login",
                         fontSize: 22,

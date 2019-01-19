@@ -1,4 +1,4 @@
-package com.messenger;
+package com.instaflutter.onboarding.android;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

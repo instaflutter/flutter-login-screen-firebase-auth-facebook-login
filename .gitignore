@@ -1,0 +1,4 @@
+build
+ios/Pods
+Podfile.lock
+android/.gradle

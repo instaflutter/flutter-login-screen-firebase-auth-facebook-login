@@ -29,7 +29,7 @@ class CustomFlatButton extends StatelessWidget {
       color: color,
       splashColor: splashColor,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5.0),
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Text(
           title,
           softWrap: true,
