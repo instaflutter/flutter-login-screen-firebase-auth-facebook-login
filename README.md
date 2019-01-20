@@ -9,7 +9,7 @@ Jumpstart your Flutter app development with this pre-built Flutter starter kit. 
 ### Flutter Walkthrough
 
 <a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0564-473x1024.png" alt="flutter onboarding walkthrough flow" width="210" height="456" /></a>
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0565-473x1024.png" alt="flutter firebase auth" width="473" width="210" height="456" /></a>
+<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0565-473x1024.png" alt="flutter firebase auth" width="210" height="456" /></a>
 <a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0566-473x1024.png" alt="flutter facebook login" width="210" height="456"/></a>
 <a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0567-473x1024.png" alt="flutter starter kit" width="210" height="456"/></a>
 
