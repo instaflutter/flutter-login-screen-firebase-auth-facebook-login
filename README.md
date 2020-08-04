@@ -3,10 +3,7 @@
 Jumpstart your Flutter app development with this pre-built Flutter starter kit. Don't reinvent the wheel by writing the boring boilerplate starter code. Jump straight into the action and focus strictly on your core app features.
 
 # Instaflutter Onboarding
-
-## The most complete starter kit project for Flutter.
-
-### Flutter Walkthrough
+### The most complete starter kit project for Flutter.
 
 <center><a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/Screen-Shot-2020-08-04-at-2.35.51-PM.png" alt="flutter login screen firebase"/></a></center>
 <center><a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/Screen-Shot-2020-08-04-at-2.36.26-PM.png" alt="flutter auth screen firebase" /></a></center>
