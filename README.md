@@ -1,16 +1,45 @@
-# flutter_login_screen
+# Flutter Login Screen with Firebase Auth and Facebook Login
 
-Functional Flutter Starter Kit
+Jumpstart your Flutter app development with this pre-built Flutter starter kit. Don't reinvent the wheel by writing the boring boilerplate starter code. Jump straight into the action and focus strictly on your core app features.
 
-## Getting Started
+# Instaflutter Onboarding
 
-This project is a starting point for a Flutter application.
+## The most complete starter kit project for Flutter.
 
-A few resources to get you started if this is your first Flutter project:
+### Flutter Walkthrough
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<center><a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/Screen-Shot-2020-08-04-at-2.35.51-PM.png" alt="flutter login screen firebase" width="210" height="456" /></a></center>
+<center><a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/Screen-Shot-2020-08-04-at-2.36.26-PM.png" alt="flutter auth screen firebase" width="210" height="456" /></a></center>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+
+Instaflutter Onboarding is a fully functional app that provides Flutter developers with a coded template for their mobile app projects. It has a great number of popular features:
+
+* Firebase Auth integration
+* Login with Facebook
+* Login with e-mail & password
+* Persistent Login Credentials
+* Visual Error Handling
+* Firebase Firestore integration
+* Logout Functionality
+* Profile Photo Upload
+* Firebase Storage integration 
+
+## Fully Functional Screens
+
+* Walkthrough flow
+* Welcome Screen
+* Login Screen
+* Sign up Screen
+* Home Screen
+* Navigation Drawer
+
+## Other advantages
+
+* Beautiful UI
+* Optimized for both iOS and Android
+* Modularized Code
+* Loading States
+* Error Handling
+
+Coded with ❤️ by <a href="https://www.instaflutter.com">Instaflutter</a>.
