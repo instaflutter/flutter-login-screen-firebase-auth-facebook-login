@@ -3,9 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>Onboarding</string>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Onboarding</string>
+	<string>flutter_login_screen</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -34,7 +32,7 @@
 	<key>FacebookAppID</key>
 	<string>285315185217069</string>
 	<key>FacebookDisplayName</key>
-	<string>Flutter Onboarding</string>
+	<string>InstaFlutter</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -63,5 +61,15 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>NSCameraUsageDescription</key>
+    <string>The app allows you to take photos and send them to your friends.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app uses your photo library to upload your profile photo.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app allows you to share location with your close friends.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app allows you to send audio messages to your friends.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>This app allows you to send photos from your library to your friends.</string>
 </dict>
 </plist>
