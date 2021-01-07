@@ -9,7 +9,7 @@ String validateName(String value) {
   String pattern = r'(^[a-zA-Z ]*$)';
   RegExp regExp = new RegExp(pattern);
   if (value.length == 0) {
-    return "Name is Required";
+    return "Name is required";
   } else if (!regExp.hasMatch(value)) {
     return "Name must be a-z and A-Z";
   }
@@ -20,16 +20,16 @@ String validateMobile(String value) {
   String pattern = r'(^[0-9]*$)';
   RegExp regExp = new RegExp(pattern);
   if (value.length == 0) {
-    return "Mobile is Required";
+    return "Mobile phone number is required";
   } else if (!regExp.hasMatch(value)) {
-    return "Mobile Number must be digits";
+    return "Mobile phone number must contain only digits";
   }
   return null;
 }
 
 String validatePassword(String value) {
   if (value.length < 6)
-    return 'Password must be more than 5 character';
+    return 'Password must be more than 5 charaters';
   else
     return null;
 }
@@ -124,7 +124,7 @@ push(BuildContext context, Widget destination) {
 pushAndRemoveUntil(BuildContext context, Widget destination, bool predict) {
   Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => destination),
-      (Route<dynamic> route) => predict);
+          (Route<dynamic> route) => predict);
 }
 
 Widget displayCircleImage(String picUrl, double size, hasBorder) =>

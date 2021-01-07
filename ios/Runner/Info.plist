@@ -18,8 +18,28 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb285315185217069</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+	<string>285315185217069</string>
+	<key>FacebookDisplayName</key>
+	<string>InstaFlutter</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -41,29 +61,15 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-	 <!-- Facebook Login configuration -->
-            <key>CFBundleURLTypes</key>
-            <array>
-                <dict>
-                    <key>CFBundleURLSchemes</key>
-                    <array>
-                        <string>fb285315185217069</string>
-                    </array>
-                </dict>
-            </array>
-            <key>FacebookAppID</key>
-            <string>285315185217069</string>
-            <key>FacebookDisplayName</key>
-            <string>InstaFlutter</string>
-
-            <key>LSApplicationQueriesSchemes</key>
-            <array>
-                <string>fbapi</string>
-                <string>fb-messenger-share-api</string>
-                <string>fbauth2</string>
-                <string>fbshareextension</string>
-            </array>
-
+    <key>NSCameraUsageDescription</key>
+    <string>The app allows you to take photos and send them to your friends.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app uses your photo library to upload your profile photo.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app allows you to share location with your close friends.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app allows you to send audio messages to your friends.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>This app allows you to send photos from your library to your friends.</string>
 </dict>
 </plist>

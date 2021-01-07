@@ -3,29 +3,14 @@
 Jumpstart your Flutter app development with this pre-built Flutter starter kit. Don't reinvent the wheel by writing the boring boilerplate starter code. Jump straight into the action and focus strictly on your core app features.
 
 # Instaflutter Onboarding
+### The most complete starter kit project for Flutter.
 
-## The most complete starter kit for Flutter.
-
-### Flutter Walkthrough
-
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0564-473x1024.png" alt="flutter onboarding walkthrough flow" width="210" height="456" /></a>
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0565-473x1024.png" alt="flutter firebase auth" width="210" height="456" /></a>
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0566-473x1024.png" alt="flutter facebook login" width="210" height="456"/></a>
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0567-473x1024.png" alt="flutter starter kit" width="210" height="456"/></a>
-
-### Login & Sign Up with Firebase and Facebook
-
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0563-473x1024.png" alt="welcome landing screen flutter" width="210" height="456"/></a>
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0569-473x1024.png" alt="flutter login screen facebook firebase" width="210" height="456" /></a>
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0568-473x1024.png" alt="flutter sign up screen" width="210" height="456"/></a>
-
-### Post-authentication Screens
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0571-473x1024.png" alt="flutter ui kit design" width="210" height="456" /></a>
-<a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/IMG_0570-473x1024.png" alt="flutter navigation drawer" width="210" height="456"/></a>
+<center><a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/Screen-Shot-2020-08-04-at-2.35.51-PM.png" alt="flutter login screen firebase"/></a></center>
+<center><a href="https://www.instaflutter.com/"><img src="https://www.instaflutter.com/wp-content/uploads/2019/01/Screen-Shot-2020-08-04-at-2.36.26-PM.png" alt="flutter auth screen firebase" /></a></center>
 
 ## Features
 
-Instaflutter Onboarding is a fully functional app that provides Flutter developers with a coded template for their projects. It has a great number of popular features:
+Instaflutter Onboarding is a fully functional app that provides Flutter developers with a coded template for their mobile app projects. It has a great number of popular features:
 
 * Firebase Auth integration
 * Login with Facebook
@@ -34,6 +19,8 @@ Instaflutter Onboarding is a fully functional app that provides Flutter develope
 * Visual Error Handling
 * Firebase Firestore integration
 * Logout Functionality
+* Profile Photo Upload
+* Firebase Storage integration 
 
 ## Fully Functional Screens
 
@@ -49,5 +36,7 @@ Instaflutter Onboarding is a fully functional app that provides Flutter develope
 * Beautiful UI
 * Optimized for both iOS and Android
 * Modularized Code
+* Loading States
+* Error Handling
 
-Coded with ❤️ by <a href="https://www.instaflutter.com">Instaflutter</a>.
+Coded with ❤️  by <a href="https://www.instaflutter.com">Instaflutter</a>.

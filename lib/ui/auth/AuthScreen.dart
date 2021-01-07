@@ -15,7 +15,7 @@ class AuthScreen extends StatelessWidget {
           children: <Widget>[
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 70.0, bottom: 20.0),
+                padding: const EdgeInsets.only(top: 200.0, bottom: 20.0),
                 child: Icon(
                   Icons.phone_iphone,
                   size: 150,
