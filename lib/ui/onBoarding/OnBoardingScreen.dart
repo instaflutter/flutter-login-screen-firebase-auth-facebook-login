@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_screen/ui/utils/helper.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'file:///D:/FlutterFreebies2/FlutterLogin/lib/services/helper.dart';
 
 import '../../constants.dart' as Constants;
 import '../auth/AuthScreen.dart';

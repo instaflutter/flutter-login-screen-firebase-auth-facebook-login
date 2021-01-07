@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_login_screen/model/User.dart';
 import 'package:flutter_login_screen/services/Authenticate.dart';
 import 'package:flutter_login_screen/ui/home/HomeScreen.dart';
-import 'package:flutter_login_screen/ui/utils/helper.dart';
+import 'file:///D:/FlutterFreebies2/FlutterLogin/lib/services/helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants.dart' as Constants;
