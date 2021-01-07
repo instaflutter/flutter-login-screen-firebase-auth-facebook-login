@@ -1,18 +1,16 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_screen/constants.dart';
 import 'package:flutter_login_screen/model/User.dart';
+import 'package:flutter_login_screen/services/Authenticate.dart';
 import 'package:flutter_login_screen/ui/auth/AuthScreen.dart';
-import 'package:flutter_login_screen/ui/services/Authenticate.dart';
 import 'package:flutter_login_screen/ui/utils/helper.dart';
 
 import '../../main.dart';
-
-FireStoreUtils _fireStoreUtils = FireStoreUtils();
 
 class HomeScreen extends StatefulWidget {
   final User user;
@@ -57,8 +55,8 @@ class _HomeState extends State<HomeScreen> {
               onTap: () async {
                 user.active = false;
                 user.lastOnlineTimestamp = Timestamp.now();
-                _fireStoreUtils.updateCurrentUser(user, context);
-                await FirebaseAuth.instance.signOut();
+                FireStoreUtils.updateCurrentUser(user);
+                await auth.FirebaseAuth.instance.signOut();
                 MyAppState.currentUser = null;
                 pushAndRemoveUntil(context, AuthScreen(), false);
               },

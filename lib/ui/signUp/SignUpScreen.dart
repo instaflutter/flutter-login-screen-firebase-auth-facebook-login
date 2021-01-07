@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_screen/model/User.dart';
+import 'package:flutter_login_screen/services/Authenticate.dart';
 import 'package:flutter_login_screen/ui/home/HomeScreen.dart';
-import 'package:flutter_login_screen/ui/services/Authenticate.dart';
 import 'package:flutter_login_screen/ui/utils/helper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,9 +22,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUpScreen> {
+  final ImagePicker _imagePicker = ImagePicker();
   TextEditingController _passwordController = new TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
-  bool _validate = false;
+  AutovalidateMode _validate = AutovalidateMode.disabled;
   String firstName, lastName, email, mobile, password, confirmPassword;
 
   @override
@@ -44,7 +45,7 @@ class _SignUpState extends State<SignUpScreen> {
           margin: new EdgeInsets.only(left: 16.0, right: 16, bottom: 16),
           child: new Form(
             key: _key,
-            autovalidate: _validate,
+            autovalidateMode: _validate,
             child: formUI(),
           ),
         ),
@@ -53,13 +54,13 @@ class _SignUpState extends State<SignUpScreen> {
   }
 
   Future<void> retrieveLostData() async {
-    final LostDataResponse response = await ImagePicker.retrieveLostData();
+    final LostData response = await _imagePicker.getLostData();
     if (response == null) {
       return;
     }
     if (response.file != null) {
       setState(() {
-        _image = response.file;
+        _image = File(response.file.path);
       });
     }
   }
@@ -76,11 +77,12 @@ class _SignUpState extends State<SignUpScreen> {
           isDefaultAction: false,
           onPressed: () async {
             Navigator.pop(context);
-            var image =
-            await ImagePicker.pickImage(source: ImageSource.gallery);
-            setState(() {
-              _image = image;
-            });
+            PickedFile image =
+                await _imagePicker.getImage(source: ImageSource.gallery);
+            if (image != null)
+              setState(() {
+                _image = File(image.path);
+              });
           },
         ),
         CupertinoActionSheetAction(
@@ -88,10 +90,12 @@ class _SignUpState extends State<SignUpScreen> {
           isDestructiveAction: false,
           onPressed: () async {
             Navigator.pop(context);
-            var image = await ImagePicker.pickImage(source: ImageSource.camera);
-            setState(() {
-              _image = image;
-            });
+            PickedFile image =
+                await _imagePicker.getImage(source: ImageSource.camera);
+            if (image != null)
+              setState(() {
+                _image = File(image.path);
+              });
           },
         )
       ],
@@ -346,8 +350,9 @@ class _SignUpState extends State<SignUpScreen> {
       showProgress(context, 'Creating new account, Please wait...', false);
       var profilePicUrl = '';
       try {
-        AuthResult result = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password);
+        auth.UserCredential result = await auth.FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: email.trim(), password: password.trim());
         if (_image != null) {
           updateProgress('Uploading image, Please wait...');
           profilePicUrl = await FireStoreUtils()
@@ -360,27 +365,45 @@ class _SignUpState extends State<SignUpScreen> {
             userID: result.user.uid,
             active: true,
             lastName: lastName,
-            settings: Settings(allowPushNotifications: true),
             profilePictureURL: profilePicUrl);
         await FireStoreUtils.firestore
             .collection(Constants.USERS)
-            .document(result.user.uid)
-            .setData(user.toJson());
+            .doc(result.user.uid)
+            .set(user.toJson());
         hideProgress();
         MyAppState.currentUser = user;
         pushAndRemoveUntil(context, HomeScreen(user: user), false);
-      } catch (error) {
+      } on auth.FirebaseAuthException catch (error) {
         hideProgress();
-        (error as PlatformException).code != 'ERROR_EMAIL_ALREADY_IN_USE'
-            ? showAlertDialog(context, 'Failed', 'Couldn\'t sign up')
-            : showAlertDialog(context, 'Failed',
-            'Email already in use, Please pick another email!');
+        String message = 'Couldn\'t sign up';
+        switch (error.code) {
+          case 'email-already-in-use':
+            message = 'Email address already in use';
+            break;
+          case 'invalid-email':
+            message = 'validEmail';
+            break;
+          case 'operation-not-allowed':
+            message = 'Email/password accounts are not enabled';
+            break;
+          case 'weak-password':
+            message = 'password is too weak.';
+            break;
+          case 'too-many-requests':
+            message = 'Too many requests, '
+                'Please try again later.';
+            break;
+        }
+        showAlertDialog(context, 'Failed', message);
         print(error.toString());
+      } catch (e) {
+        print('_SignUpState._sendToServer $e');
+        hideProgress();
+        showAlertDialog(context, 'Failed', 'Couldn\'t sign up');
       }
     } else {
-      print('false');
       setState(() {
-        _validate = true;
+        _validate = AutovalidateMode.onUserInteraction;
       });
     }
   }

@@ -6,8 +6,8 @@ import 'package:progress_dialog/progress_dialog.dart';
 import '../../constants.dart';
 
 String validateName(String value) {
-  String patttern = r'(^[a-zA-Z ]*$)';
-  RegExp regExp = new RegExp(patttern);
+  String pattern = r'(^[a-zA-Z ]*$)';
+  RegExp regExp = new RegExp(pattern);
   if (value.length == 0) {
     return "Name is Required";
   } else if (!regExp.hasMatch(value)) {
@@ -17,8 +17,8 @@ String validateName(String value) {
 }
 
 String validateMobile(String value) {
-  String patttern = r'(^[0-9]*$)';
-  RegExp regExp = new RegExp(patttern);
+  String pattern = r'(^[0-9]*$)';
+  RegExp regExp = new RegExp(pattern);
   if (value.length == 0) {
     return "Mobile is Required";
   } else if (!regExp.hasMatch(value)) {
@@ -29,7 +29,7 @@ String validateMobile(String value) {
 
 String validatePassword(String value) {
   if (value.length < 6)
-    return 'Password must be more than 5 charater';
+    return 'Password must be more than 5 character';
   else
     return null;
 }
@@ -159,26 +159,20 @@ Widget _getPlaceholderOrErrorImage(double size, hasBorder) => Container(
 
 Widget _getCircularImageProvider(
     ImageProvider provider, double size, bool hasBorder) {
-  return Container(
+  return ClipOval(
+      child: Container(
     width: size,
     height: size,
     decoration: BoxDecoration(
-      color: const Color(0xff7c94b6),
-      borderRadius: new BorderRadius.all(new Radius.circular(size / 2)),
-      border: new Border.all(
-        color: Colors.white,
-        width: hasBorder ? 2.0 : 0.0,
-      ),
-    ),
-    child: ClipOval(
-        child: FadeInImage(
-            fit: BoxFit.cover,
-            placeholder: Image.asset(
-              'assets/images/placeholder.jpg',
-              fit: BoxFit.cover,
-              height: size,
-              width: size,
-            ).image,
-            image: provider)),
-  );
+        borderRadius: new BorderRadius.all(new Radius.circular(size / 2)),
+        border: new Border.all(
+          color: Colors.white,
+          style: hasBorder ? BorderStyle.solid : BorderStyle.none,
+          width: 1.0,
+        ),
+        image: DecorationImage(
+          image: provider,
+          fit: BoxFit.cover,
+        )),
+  ));
 }

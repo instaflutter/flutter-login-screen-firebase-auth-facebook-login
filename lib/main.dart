@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_screen/model/User.dart';
+import 'package:flutter_login_screen/services/Authenticate.dart';
 import 'package:flutter_login_screen/ui/home/HomeScreen.dart';
-import 'package:flutter_login_screen/ui/services/Authenticate.dart';
 import 'package:flutter_login_screen/ui/utils/helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,11 +24,67 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> with WidgetsBindingObserver {
   static User currentUser;
+  StreamSubscription tokenStream;
+
+  // Set default `_initialized` and `_error` state to false
+  bool _initialized = false;
+  bool _error = false;
+
+  // Define an async function to initialize FlutterFire
+  void initializeFlutterFire() async {
+    try {
+      // Wait for Firebase to initialize and set `_initialized` state to true
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch (e) {
+      // Set `_error` state to true if Firebase initialization fails
+      setState(() {
+        _error = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Color(Constants.COLOR_PRIMARY_DARK)));
+    // Show error message if initialization failed
+    if (_error) {
+      return MaterialApp(
+          home: Scaffold(
+        body: Container(
+          color: Colors.white,
+          child: Center(
+              child: Column(
+            children: [
+              Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 25,
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Failed to initialise firebase!',
+                style: TextStyle(color: Colors.red, fontSize: 25),
+              ),
+            ],
+          )),
+        ),
+      ));
+    }
+
+    // Show a loader until FlutterFire is initialized
+    if (!_initialized) {
+      return Container(
+        color: Colors.white,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return MaterialApp(
         theme: ThemeData(accentColor: Color(Constants.COLOR_PRIMARY)),
         debugShowCheckedModeBanner: false,
@@ -37,6 +94,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void initState() {
+    initializeFlutterFire();
     WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
@@ -49,16 +107,18 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (FirebaseAuth.instance.currentUser() != null && currentUser != null) {
+    if (auth.FirebaseAuth.instance.currentUser != null && currentUser != null) {
       if (state == AppLifecycleState.paused) {
         //user offline
+        tokenStream.pause();
         currentUser.active = false;
         currentUser.lastOnlineTimestamp = Timestamp.now();
-        FireStoreUtils.currentUserDocRef.updateData(currentUser.toJson());
+        FireStoreUtils.updateCurrentUser(currentUser);
       } else if (state == AppLifecycleState.resumed) {
         //user online
+        tokenStream.resume();
         currentUser.active = true;
-        FireStoreUtils.currentUserDocRef.updateData(currentUser.toJson());
+        FireStoreUtils.updateCurrentUser(currentUser);
       }
     }
   }
@@ -78,7 +138,7 @@ class OnBoardingState extends State<OnBoarding> {
     (prefs.getBool(Constants.FINISHED_ON_BOARDING) ?? false);
 
     if (finishedOnBoarding) {
-      FirebaseUser firebaseUser = await FirebaseAuth.instance.currentUser();
+      auth.User firebaseUser = auth.FirebaseAuth.instance.currentUser;
       if (firebaseUser != null) {
         User user = await FireStoreUtils().getCurrentUser(firebaseUser.uid);
         if (user != null) {
