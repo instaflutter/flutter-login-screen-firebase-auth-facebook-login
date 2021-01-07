@@ -98,7 +98,7 @@ class _LoginScreen extends State<LoginScreen> {
                     textAlignVertical: TextAlignVertical.center,
                     validator: validatePassword,
                     onSaved: (String val) {
-                      email = val;
+                      password = val;
                     },
                     onFieldSubmitted: (password) async {
                       await onClick(_emailController.text, password);
