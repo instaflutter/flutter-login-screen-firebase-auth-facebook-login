@@ -12,19 +12,22 @@ final _currentPageNotifier = ValueNotifier<int>(0);
 final List<String> _titlesList = [
   'Flutter Onboarding',
   'Firebase Auth',
-  'Facebook Login'
+  'Facebook Login',
+  'Instaflutter.com'
 ];
 
 final List<String> _subtitlesList = [
   'Build your onboarding flow in seconds.',
   'Use Firebase for user managements.',
-  'Leaverage Facebook to log in user easily.'
+  'Leaverage Facebook to log in user easily.',
+  'Get more awesome templates'
 ];
 
-final List<IconData> _imageList = [
+final List<dynamic> _imageList = [
   Icons.developer_mode,
   Icons.layers,
-  Icons.account_circle
+  Icons.account_circle,
+  'assets/images/ic_launcher_round.png'
 ];
 final List<Widget> _pages = [];
 
@@ -47,7 +50,7 @@ Widget _buildCircleIndicator() {
   );
 }
 
-Widget getPage(IconData icon, String title, String subTitle) {
+Widget getPage(dynamic image, String title, String subTitle) {
   return Center(
     child: Container(
       color: Color(Constants.COLOR_PRIMARY),
@@ -59,11 +62,18 @@ Widget getPage(IconData icon, String title, String subTitle) {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(40.0),
-                child: new Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 120,
-                ),
+                child: image is String
+                    ? Image.asset(
+                        image,
+                        width: 150,
+                        height: 150,
+                        fit: BoxFit.cover,
+                      )
+                    : new Icon(
+                        image,
+                        color: Colors.white,
+                        size: 150,
+                      ),
               ),
               Text(
                 title,
