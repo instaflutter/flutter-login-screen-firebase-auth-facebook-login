@@ -16,21 +16,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     'Flutter OnBoarding',
     'Firebase Auth',
     'Facebook Login',
-    'Instaflutter.com'
+    'Instaflutter.com',
+    'Jump straight into the action.'
   ];
 
   final List<String> _subtitlesList = [
     'Build your on-boarding flow in seconds.',
     'Use Firebase for user managements.',
     'Leverage Facebook to log in user easily.',
-    'Get more awesome templates'
+    'Get more awesome templates',
+    'Get Started'
   ];
 
   final List<dynamic> _imageList = [
     Icons.developer_mode,
     Icons.layers,
     Icons.account_circle,
-    'assets/images/ic_launcher_round.png'
+    'assets/images/ic_launcher_round.png',
+    Icons.code
   ];
   int _currentIndex = 0;
 
@@ -54,31 +57,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 _currentIndex = index;
               });
             },
-          ),
-          Visibility(
-            visible: _currentIndex + 1 == _titlesList.length,
-            child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Align(
-                  alignment: Directionality.of(context) == TextDirection.ltr
-                      ? Alignment.bottomRight
-                      : Alignment.bottomLeft,
-                  child: OutlineButton(
-                    onPressed: () {
-                      setFinishedOnBoarding();
-                      pushReplacement(context, AuthScreen());
-                    },
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    borderSide: BorderSide(color: Colors.white),
-                    shape: StadiumBorder(),
-                  ),
-                )),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 50.0),
@@ -127,11 +105,27 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(
-            subTitle,
-            style: TextStyle(color: Colors.white, fontSize: 14.0),
-            textAlign: TextAlign.center,
-          ),
+          child: _currentIndex + 1 == _titlesList.length
+              ? OutlineButton(
+                  onPressed: () {
+                    setFinishedOnBoarding();
+                    pushReplacement(context, new AuthScreen());
+                  },
+                  child: Text(
+                    "Get Started",
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  borderSide: BorderSide(color: Colors.white),
+                  shape: StadiumBorder(),
+                )
+              : Text(
+                  subTitle,
+                  style: TextStyle(color: Colors.white, fontSize: 14.0),
+                  textAlign: TextAlign.center,
+                ),
         ),
       ],
     );
