@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'file:///D:/FlutterFreebies2/FlutterLogin/lib/services/helper.dart';
-
-import '../../constants.dart' as Constants;
-import '../login/LoginScreen.dart';
-import '../signUp/SignUpScreen.dart';
+import 'package:flutter_login_screen/constants.dart';
+import 'package:flutter_login_screen/services/helper.dart';
+import 'package:flutter_login_screen/ui/login/loginScreen.dart';
+import 'package:flutter_login_screen/ui/signUp/signUpScreen.dart';
 
 class AuthScreen extends StatelessWidget {
   @override
@@ -20,7 +18,7 @@ class AuthScreen extends StatelessWidget {
                 child: Icon(
                   Icons.phone_iphone,
                   size: 150,
-                  color: Color(Constants.COLOR_PRIMARY),
+                  color: Color(COLOR_PRIMARY),
                 ),
               ),
             ),
@@ -28,7 +26,7 @@ class AuthScreen extends StatelessWidget {
               'Say Hello To Your New App!',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color(Constants.COLOR_PRIMARY),
+                  color: Color(COLOR_PRIMARY),
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold),
             ),
@@ -45,20 +43,20 @@ class AuthScreen extends StatelessWidget {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: RaisedButton(
-                  color: Color(Constants.COLOR_PRIMARY),
+                  color: Color(COLOR_PRIMARY),
                   child: Text(
                     'Log In',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   textColor: Colors.white,
-                  splashColor: Color(Constants.COLOR_PRIMARY),
+                  splashColor: Color(COLOR_PRIMARY),
                   onPressed: () {
                     push(context, new LoginScreen());
                   },
                   padding: EdgeInsets.only(top: 12, bottom: 12),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
-                      side: BorderSide(color: Color(Constants.COLOR_PRIMARY))),
+                      side: BorderSide(color: Color(COLOR_PRIMARY))),
                 ),
               ),
             ),

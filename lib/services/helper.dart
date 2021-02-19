@@ -29,7 +29,7 @@ String validateMobile(String value) {
 
 String validatePassword(String value) {
   if (value.length < 6)
-    return 'Password must be more than 5 charaters';
+    return 'Password must be more than 5 characters';
   else
     return null;
 }

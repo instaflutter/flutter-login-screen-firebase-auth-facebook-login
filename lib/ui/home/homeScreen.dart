@@ -5,13 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_screen/constants.dart';
-import 'package:flutter_login_screen/model/User.dart';
-import 'package:flutter_login_screen/services/Authenticate.dart';
-import 'package:flutter_login_screen/ui/auth/AuthScreen.dart';
-
-import 'file:///D:/FlutterFreebies2/FlutterLogin/lib/services/helper.dart';
-
-import '../../main.dart';
+import 'package:flutter_login_screen/main.dart';
+import 'package:flutter_login_screen/model/user.dart';
+import 'package:flutter_login_screen/services/authenticate.dart';
+import 'package:flutter_login_screen/services/helper.dart';
+import 'package:flutter_login_screen/ui/auth/authScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   final User user;

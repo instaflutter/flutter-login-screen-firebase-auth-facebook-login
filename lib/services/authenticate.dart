@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_login_screen/constants.dart';
-import 'package:flutter_login_screen/model/User.dart';
+import 'package:flutter_login_screen/model/user.dart';
 
 class FireStoreUtils {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;

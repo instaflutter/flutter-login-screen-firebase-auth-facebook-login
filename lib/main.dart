@@ -4,16 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_login_screen/model/User.dart';
-import 'package:flutter_login_screen/services/Authenticate.dart';
+import 'package:flutter_login_screen/constants.dart';
+import 'package:flutter_login_screen/model/user.dart';
+import 'package:flutter_login_screen/services/authenticate.dart';
 import 'package:flutter_login_screen/services/helper.dart';
-import 'package:flutter_login_screen/ui/home/HomeScreen.dart';
+import 'package:flutter_login_screen/ui/auth/authScreen.dart';
+import 'package:flutter_login_screen/ui/home/homeScreen.dart';
+import 'package:flutter_login_screen/ui/onBoarding/onBoardingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'constants.dart' as Constants;
-import 'ui/auth/AuthScreen.dart';
-import 'ui/onBoarding/OnBoardingScreen.dart';
 
 void main() => runApp(new MyApp());
 
@@ -48,8 +46,6 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(Constants.COLOR_PRIMARY_DARK)));
     // Show error message if initialization failed
     if (_error) {
       return MaterialApp(
@@ -86,9 +82,9 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     }
 
     return MaterialApp(
-        theme: ThemeData(accentColor: Color(Constants.COLOR_PRIMARY)),
+        theme: ThemeData(accentColor: Color(COLOR_PRIMARY)),
         debugShowCheckedModeBanner: false,
-        color: Color(Constants.COLOR_PRIMARY),
+        color: Color(COLOR_PRIMARY),
         home: OnBoarding());
   }
 
@@ -134,8 +130,7 @@ class OnBoarding extends StatefulWidget {
 class OnBoardingState extends State<OnBoarding> {
   Future hasFinishedOnBoarding() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool finishedOnBoarding =
-    (prefs.getBool(Constants.FINISHED_ON_BOARDING) ?? false);
+    bool finishedOnBoarding = (prefs.getBool(FINISHED_ON_BOARDING) ?? false);
 
     if (finishedOnBoarding) {
       auth.User firebaseUser = auth.FirebaseAuth.instance.currentUser;
@@ -164,7 +159,7 @@ class OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(Constants.COLOR_PRIMARY),
+      backgroundColor: Color(COLOR_PRIMARY),
       body: Center(
         child: CircularProgressIndicator(
           backgroundColor: Colors.white,

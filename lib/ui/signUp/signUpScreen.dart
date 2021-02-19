@@ -4,16 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_screen/model/User.dart';
-import 'package:flutter_login_screen/services/Authenticate.dart';
-import 'package:flutter_login_screen/ui/home/HomeScreen.dart';
+import 'package:flutter_login_screen/constants.dart';
+import 'package:flutter_login_screen/main.dart';
+import 'package:flutter_login_screen/model/user.dart';
+import 'package:flutter_login_screen/services/authenticate.dart';
+import 'package:flutter_login_screen/services/helper.dart';
+import 'package:flutter_login_screen/ui/home/homeScreen.dart';
 import 'package:image_picker/image_picker.dart';
-
-import 'file:///D:/FlutterFreebies2/FlutterLogin/lib/services/helper.dart';
-
-import '../../constants.dart' as Constants;
-import '../../constants.dart';
-import '../../main.dart';
 
 File _image;
 
@@ -118,7 +115,7 @@ class _SignUpState extends State<SignUpScreen> {
             child: Text(
               'Create new account',
               style: TextStyle(
-                  color: Color(Constants.COLOR_PRIMARY),
+                  color: Color(COLOR_PRIMARY),
                   fontWeight: FontWeight.bold,
                   fontSize: 25.0),
             )),
@@ -179,8 +176,7 @@ class _SignUpState extends State<SignUpScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color: Color(Constants.COLOR_PRIMARY),
-                                width: 2.0)),
+                                color: Color(COLOR_PRIMARY), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))))),
@@ -204,8 +200,7 @@ class _SignUpState extends State<SignUpScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color: Color(Constants.COLOR_PRIMARY),
-                                width: 2.0)),
+                                color: Color(COLOR_PRIMARY), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))))),
@@ -230,8 +225,7 @@ class _SignUpState extends State<SignUpScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color: Color(Constants.COLOR_PRIMARY),
-                                width: 2.0)),
+                                color: Color(COLOR_PRIMARY), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))))),
@@ -256,8 +250,7 @@ class _SignUpState extends State<SignUpScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color: Color(Constants.COLOR_PRIMARY),
-                                width: 2.0)),
+                                color: Color(COLOR_PRIMARY), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))))),
@@ -275,17 +268,16 @@ class _SignUpState extends State<SignUpScreen> {
                     password = val;
                   },
                   style: TextStyle(height: 0.8, fontSize: 18.0),
-                  cursorColor: Color(Constants.COLOR_PRIMARY),
+                  cursorColor: Color(COLOR_PRIMARY),
                   decoration: InputDecoration(
                       contentPadding:
-                      new EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                          new EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       fillColor: Colors.white,
                       hintText: 'Password',
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                           borderSide: BorderSide(
-                              color: Color(Constants.COLOR_PRIMARY),
-                              width: 2.0)),
+                              color: Color(COLOR_PRIMARY), width: 2.0)),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ))),
@@ -306,16 +298,16 @@ class _SignUpState extends State<SignUpScreen> {
                   confirmPassword = val;
                 },
                 style: TextStyle(height: 0.8, fontSize: 18.0),
-                cursorColor: Color(Constants.COLOR_PRIMARY),
+                cursorColor: Color(COLOR_PRIMARY),
                 decoration: InputDecoration(
                     contentPadding:
-                    new EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                        new EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     fillColor: Colors.white,
                     hintText: 'Confirm Password',
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
                         borderSide: BorderSide(
-                            color: Color(Constants.COLOR_PRIMARY), width: 2.0)),
+                            color: Color(COLOR_PRIMARY), width: 2.0)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ))),
@@ -326,18 +318,18 @@ class _SignUpState extends State<SignUpScreen> {
           child: ConstrainedBox(
             constraints: const BoxConstraints(minWidth: double.infinity),
             child: RaisedButton(
-              color: Color(Constants.COLOR_PRIMARY),
+              color: Color(COLOR_PRIMARY),
               child: Text(
                 'Sign Up',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               textColor: Colors.white,
-              splashColor: Color(Constants.COLOR_PRIMARY),
+              splashColor: Color(COLOR_PRIMARY),
               onPressed: _sendToServer,
               padding: EdgeInsets.only(top: 12, bottom: 12),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),
-                  side: BorderSide(color: Color(Constants.COLOR_PRIMARY))),
+                  side: BorderSide(color: Color(COLOR_PRIMARY))),
             ),
           ),
         ),
@@ -368,7 +360,7 @@ class _SignUpState extends State<SignUpScreen> {
             lastName: lastName,
             profilePictureURL: profilePicUrl);
         await FireStoreUtils.firestore
-            .collection(Constants.USERS)
+            .collection(USERS)
             .doc(result.user.uid)
             .set(user.toJson());
         hideProgress();

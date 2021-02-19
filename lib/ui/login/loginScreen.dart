@@ -7,15 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:flutter_login_screen/model/User.dart';
-import 'package:flutter_login_screen/services/Authenticate.dart';
-import 'package:flutter_login_screen/ui/home/HomeScreen.dart';
+import 'package:flutter_login_screen/constants.dart';
+import 'package:flutter_login_screen/main.dart';
+import 'package:flutter_login_screen/model/user.dart';
+import 'package:flutter_login_screen/services/authenticate.dart';
+import 'package:flutter_login_screen/services/helper.dart';
+import 'package:flutter_login_screen/ui/home/homeScreen.dart';
 import 'package:http/http.dart' as http;
-
-import 'file:///D:/FlutterFreebies2/FlutterLogin/lib/services/helper.dart';
-
-import '../../constants.dart' as Constants;
-import '../../main.dart';
 
 final _fireStoreUtils = FireStoreUtils();
 
@@ -50,7 +48,7 @@ class _LoginScreen extends State<LoginScreen> {
               child: Text(
                 'Sign In',
                 style: TextStyle(
-                    color: Color(Constants.COLOR_PRIMARY),
+                    color: Color(COLOR_PRIMARY),
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold),
               ),
@@ -67,11 +65,10 @@ class _LoginScreen extends State<LoginScreen> {
                     onSaved: (String val) {
                       email = val;
                     },
-                    onFieldSubmitted: (_) =>
-                        FocusScope.of(context).nextFocus(),
+                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     style: TextStyle(fontSize: 18.0),
                     keyboardType: TextInputType.emailAddress,
-                    cursorColor: Color(Constants.COLOR_PRIMARY),
+                    cursorColor: Color(COLOR_PRIMARY),
                     decoration: InputDecoration(
                         contentPadding:
                             new EdgeInsets.only(left: 16, right: 16),
@@ -80,8 +77,7 @@ class _LoginScreen extends State<LoginScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color: Color(Constants.COLOR_PRIMARY),
-                                width: 2.0)),
+                                color: Color(COLOR_PRIMARY), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))),
@@ -104,7 +100,7 @@ class _LoginScreen extends State<LoginScreen> {
                     obscureText: true,
                     textInputAction: TextInputAction.done,
                     style: TextStyle(fontSize: 18.0),
-                    cursorColor: Color(Constants.COLOR_PRIMARY),
+                    cursorColor: Color(COLOR_PRIMARY),
                     decoration: InputDecoration(
                         contentPadding:
                             new EdgeInsets.only(left: 16, right: 16),
@@ -113,8 +109,7 @@ class _LoginScreen extends State<LoginScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
-                                color: Color(Constants.COLOR_PRIMARY),
-                                width: 2.0)),
+                                color: Color(COLOR_PRIMARY), width: 2.0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ))),
@@ -126,22 +121,20 @@ class _LoginScreen extends State<LoginScreen> {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: RaisedButton(
-                  color: Color(Constants.COLOR_PRIMARY),
+                  color: Color(COLOR_PRIMARY),
                   child: Text(
                     'Log In',
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   textColor: Colors.white,
-                  splashColor: Color(Constants.COLOR_PRIMARY),
+                  splashColor: Color(COLOR_PRIMARY),
                   onPressed: () async {
                     await login();
                   },
                   padding: EdgeInsets.only(top: 12, bottom: 12),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
-                      side:
-                          BorderSide(color: Color(Constants.COLOR_PRIMARY))),
+                      side: BorderSide(color: Color(COLOR_PRIMARY))),
                 ),
               ),
             ),
@@ -174,9 +167,9 @@ class _LoginScreen extends State<LoginScreen> {
                       width: 30,
                     ),
                   ),
-                  color: Color(Constants.FACEBOOK_BUTTON_COLOR),
+                  color: Color(FACEBOOK_BUTTON_COLOR),
                   textColor: Colors.white,
-                  splashColor: Color(Constants.FACEBOOK_BUTTON_COLOR),
+                  splashColor: Color(FACEBOOK_BUTTON_COLOR),
                   onPressed: () async {
                     final facebookLogin = FacebookLogin();
                     final result = await facebookLogin.logIn(['email']);
@@ -202,15 +195,14 @@ class _LoginScreen extends State<LoginScreen> {
                       case FacebookLoginStatus.cancelledByUser:
                         break;
                       case FacebookLoginStatus.error:
-                        showAlertDialog(context, 'Error',
-                            'Couldn\'t login via facebook.');
+                        showAlertDialog(
+                            context, 'Error', 'Couldn\'t login via facebook.');
                         break;
                     }
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
-                      side: BorderSide(
-                          color: Color(Constants.FACEBOOK_BUTTON_COLOR))),
+                      side: BorderSide(color: Color(FACEBOOK_BUTTON_COLOR))),
                 ),
               ),
             ),
@@ -240,7 +232,7 @@ class _LoginScreen extends State<LoginScreen> {
           .signInWithEmailAndPassword(
               email: email.trim(), password: password.trim());
       DocumentSnapshot documentSnapshot = await FireStoreUtils.firestore
-          .collection(Constants.USERS)
+          .collection(USERS)
           .doc(result.user.uid)
           .get();
       User user;
@@ -299,7 +291,7 @@ class _LoginScreen extends State<LoginScreen> {
         active: true,
         userID: userID);
     await FireStoreUtils.firestore
-        .collection(Constants.USERS)
+        .collection(USERS)
         .doc(userID)
         .set(user.toJson())
         .then((onValue) {
