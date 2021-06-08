@@ -147,7 +147,7 @@ class _SignUpState extends State<SignUpScreen> {
                 left: 80,
                 right: 0,
                 child: FloatingActionButton(
-                    backgroundColor: Color(COLOR_ACCENT),
+                    backgroundColor: Color(COLOR_PRIMARY),
                     child: Icon(Icons.camera_alt),
                     mini: true,
                     onPressed: _onCameraClick),

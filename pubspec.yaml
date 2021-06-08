@@ -15,7 +15,7 @@ dependencies:
       url: https://github.com/mostafaAbdelazim/progress_dialog.git
   flutter_facebook_auth: ^3.4.1
   http: ^0.13.3
-  image_picker: ^0.8.0+1
+  image_picker: ^0.8.0+3
   firebase_storage: ^8.1.1
   cached_network_image: ^3.0.0
   smooth_page_indicator: ^0.3.0-nullsafety.0
@@ -26,12 +26,15 @@ dependencies:
   cupertino_icons: ^1.0.3
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  flutter_launcher_icons: ^0.9.0
 
+flutter_icons:
+  android: false
+  ios: true
+  remove_alpha_ios: true
+  image_path: android/app/src/main/ic_launcher-playstore.png
 
 flutter:
-
   uses-material-design: true
   assets:
     - assets/images/
