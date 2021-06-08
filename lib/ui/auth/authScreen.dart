@@ -43,19 +43,26 @@ class AuthScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
             child: ConstrainedBox(
               constraints: const BoxConstraints(minWidth: double.infinity),
-              child: RaisedButton(
-                color: Color(COLOR_PRIMARY),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(COLOR_PRIMARY),
+                  textStyle: TextStyle(color: Colors.white),
+                  padding: EdgeInsets.only(top: 12, bottom: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    side: BorderSide(
+                      color: Color(COLOR_PRIMARY),
+                    ),
+                  ),
+                ),
                 child: Text(
                   'Log In',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                textColor: Colors.white,
-                splashColor: Color(COLOR_PRIMARY),
-                onPressed: () => push(context, new LoginScreen()),
-                padding: EdgeInsets.only(top: 12, bottom: 12),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    side: BorderSide(color: Color(COLOR_PRIMARY))),
+                onPressed: () => push(
+                  context,
+                  new LoginScreen(),
+                ),
               ),
             ),
           ),
@@ -64,7 +71,20 @@ class AuthScreen extends StatelessWidget {
                 right: 40.0, left: 40.0, top: 20, bottom: 20),
             child: ConstrainedBox(
               constraints: const BoxConstraints(minWidth: double.infinity),
-              child: FlatButton(
+              child: TextButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                    EdgeInsets.only(top: 12, bottom: 12),
+                  ),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      side: BorderSide(
+                        color: Color(COLOR_PRIMARY),
+                      ),
+                    ),
+                  ),
+                ),
                 child: Text(
                   'Sign Up',
                   style: TextStyle(
@@ -73,10 +93,6 @@ class AuthScreen extends StatelessWidget {
                       color: Color(COLOR_PRIMARY)),
                 ),
                 onPressed: () => push(context, new SignUpScreen()),
-                padding: EdgeInsets.only(top: 12, bottom: 12),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    side: BorderSide(color: Color(COLOR_PRIMARY))),
               ),
             ),
           )

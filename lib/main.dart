@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +20,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> with WidgetsBindingObserver {
-  static User currentUser;
-  StreamSubscription tokenStream;
+  static late User? currentUser;
 
   // Set default `_initialized` and `_error` state to false
   bool _initialized = false;
@@ -76,7 +74,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
       return Container(
         color: Colors.white,
         child: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       );
     }
@@ -90,33 +88,8 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    initializeFlutterFire();
-    WidgetsBinding.instance.addObserver(this);
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (auth.FirebaseAuth.instance.currentUser != null && currentUser != null) {
-      if (state == AppLifecycleState.paused) {
-        //user offline
-        tokenStream.pause();
-        currentUser.active = false;
-        currentUser.lastOnlineTimestamp = Timestamp.now();
-        FireStoreUtils.updateCurrentUser(currentUser);
-      } else if (state == AppLifecycleState.resumed) {
-        //user online
-        tokenStream.resume();
-        currentUser.active = true;
-        FireStoreUtils.updateCurrentUser(currentUser);
-      }
-    }
+    initializeFlutterFire();
   }
 }
 
@@ -133,9 +106,9 @@ class OnBoardingState extends State<OnBoarding> {
     bool finishedOnBoarding = (prefs.getBool(FINISHED_ON_BOARDING) ?? false);
 
     if (finishedOnBoarding) {
-      auth.User firebaseUser = auth.FirebaseAuth.instance.currentUser;
+      auth.User? firebaseUser = auth.FirebaseAuth.instance.currentUser;
       if (firebaseUser != null) {
-        User user = await FireStoreUtils().getCurrentUser(firebaseUser.uid);
+        User? user = await FireStoreUtils.getCurrentUser(firebaseUser.uid);
         if (user != null) {
           MyAppState.currentUser = user;
           pushReplacement(context, new HomeScreen(user: user));
@@ -159,10 +132,9 @@ class OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(COLOR_PRIMARY),
       body: Center(
-        child: CircularProgressIndicator(
-          backgroundColor: Colors.white,
+        child: CircularProgressIndicator.adaptive(
+          valueColor: AlwaysStoppedAnimation(Color(COLOR_PRIMARY)),
         ),
       ),
     );

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +11,7 @@ import 'package:flutter_login_screen/services/helper.dart';
 import 'package:flutter_login_screen/ui/home/homeScreen.dart';
 import 'package:image_picker/image_picker.dart';
 
-File _image;
+File? _image;
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -24,7 +23,7 @@ class _SignUpState extends State<SignUpScreen> {
   TextEditingController _passwordController = new TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
   AutovalidateMode _validate = AutovalidateMode.disabled;
-  String firstName, lastName, email, mobile, password, confirmPassword;
+  String? name, email, password, confirmPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +51,13 @@ class _SignUpState extends State<SignUpScreen> {
   }
 
   Future<void> retrieveLostData() async {
-    final LostData response = await _imagePicker.getLostData();
+    final LostData? response = await _imagePicker.getLostData();
     if (response == null) {
       return;
     }
     if (response.file != null) {
       setState(() {
-        _image = File(response.file.path);
+        _image = File(response.file!.path);
       });
     }
   }
@@ -75,7 +74,7 @@ class _SignUpState extends State<SignUpScreen> {
           isDefaultAction: false,
           onPressed: () async {
             Navigator.pop(context);
-            PickedFile image =
+            PickedFile? image =
                 await _imagePicker.getImage(source: ImageSource.gallery);
             if (image != null)
               setState(() {
@@ -88,7 +87,7 @@ class _SignUpState extends State<SignUpScreen> {
           isDestructiveAction: false,
           onPressed: () async {
             Navigator.pop(context);
-            PickedFile image =
+            PickedFile? image =
                 await _imagePicker.getImage(source: ImageSource.camera);
             if (image != null)
               setState(() {
@@ -121,7 +120,7 @@ class _SignUpState extends State<SignUpScreen> {
             )),
         Padding(
           padding:
-          const EdgeInsets.only(left: 8.0, top: 32, right: 8, bottom: 8),
+              const EdgeInsets.only(left: 8.0, top: 32, right: 8, bottom: 8),
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: <Widget>[
@@ -134,13 +133,13 @@ class _SignUpState extends State<SignUpScreen> {
                     height: 170,
                     child: _image == null
                         ? Image.asset(
-                      'assets/images/placeholder.jpg',
-                      fit: BoxFit.cover,
-                    )
+                            'assets/images/placeholder.jpg',
+                            fit: BoxFit.cover,
+                          )
                         : Image.file(
-                      _image,
-                      fit: BoxFit.cover,
-                    ),
+                            _image!,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
               ),
@@ -160,19 +159,16 @@ class _SignUpState extends State<SignUpScreen> {
             constraints: BoxConstraints(minWidth: double.infinity),
             child: Padding(
                 padding:
-                const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
+                    const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
                 child: TextFormField(
                     validator: validateName,
-                    onSaved: (String val) {
-                      firstName = val;
-                    },
+                    onSaved: (val) => name = val,
                     textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: InputDecoration(
                         contentPadding: new EdgeInsets.symmetric(
                             vertical: 8, horizontal: 16),
                         fillColor: Colors.white,
-                        hintText: 'First Name',
+                        hintText: 'Name',
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25.0),
                             borderSide: BorderSide(
@@ -184,64 +180,12 @@ class _SignUpState extends State<SignUpScreen> {
             constraints: BoxConstraints(minWidth: double.infinity),
             child: Padding(
                 padding:
-                const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
-                child: TextFormField(
-                    validator: validateName,
-                    onSaved: (String val) {
-                      lastName = val;
-                    },
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                    decoration: InputDecoration(
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 16),
-                        fillColor: Colors.white,
-                        hintText: 'Last Name',
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                            borderSide: BorderSide(
-                                color: Color(COLOR_PRIMARY), width: 2.0)),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ))))),
-        ConstrainedBox(
-            constraints: BoxConstraints(minWidth: double.infinity),
-            child: Padding(
-                padding:
-                const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
-                child: TextFormField(
-                    keyboardType: TextInputType.phone,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                    validator: validateMobile,
-                    onSaved: (String val) {
-                      mobile = val;
-                    },
-                    decoration: InputDecoration(
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 16),
-                        fillColor: Colors.white,
-                        hintText: 'Mobile Number',
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                            borderSide: BorderSide(
-                                color: Color(COLOR_PRIMARY), width: 2.0)),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ))))),
-        ConstrainedBox(
-            constraints: BoxConstraints(minWidth: double.infinity),
-            child: Padding(
-                padding:
-                const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
+                    const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
                 child: TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     validator: validateEmail,
-                    onSaved: (String val) {
-                      email = val;
-                    },
+                    onSaved: (val) => email = val,
                     decoration: InputDecoration(
                         contentPadding: new EdgeInsets.symmetric(
                             vertical: 8, horizontal: 16),
@@ -261,12 +205,9 @@ class _SignUpState extends State<SignUpScreen> {
               child: TextFormField(
                   obscureText: true,
                   textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                   controller: _passwordController,
                   validator: validatePassword,
-                  onSaved: (String val) {
-                    password = val;
-                  },
+                  onSaved: (val) => password = val,
                   style: TextStyle(height: 0.8, fontSize: 18.0),
                   cursorColor: Color(COLOR_PRIMARY),
                   decoration: InputDecoration(
@@ -288,15 +229,11 @@ class _SignUpState extends State<SignUpScreen> {
             padding: const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
             child: TextFormField(
                 textInputAction: TextInputAction.done,
-                onFieldSubmitted: (_) {
-                  _sendToServer();
-                },
+                onFieldSubmitted: (_) => _signUp(),
                 obscureText: true,
                 validator: (val) =>
                     validateConfirmPassword(_passwordController.text, val),
-                onSaved: (String val) {
-                  confirmPassword = val;
-                },
+                onSaved: (val) => confirmPassword = val,
                 style: TextStyle(height: 0.8, fontSize: 18.0),
                 cursorColor: Color(COLOR_PRIMARY),
                 decoration: InputDecoration(
@@ -317,19 +254,26 @@ class _SignUpState extends State<SignUpScreen> {
           padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40.0),
           child: ConstrainedBox(
             constraints: const BoxConstraints(minWidth: double.infinity),
-            child: RaisedButton(
-              color: Color(COLOR_PRIMARY),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Color(COLOR_PRIMARY),
+                padding: EdgeInsets.only(top: 12, bottom: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                  side: BorderSide(
+                    color: Color(COLOR_PRIMARY),
+                  ),
+                ),
+              ),
               child: Text(
                 'Sign Up',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-              textColor: Colors.white,
-              splashColor: Color(COLOR_PRIMARY),
-              onPressed: _sendToServer,
-              padding: EdgeInsets.only(top: 12, bottom: 12),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                  side: BorderSide(color: Color(COLOR_PRIMARY))),
+              onPressed: _signUp,
             ),
           ),
         ),
@@ -337,67 +281,33 @@ class _SignUpState extends State<SignUpScreen> {
     );
   }
 
-  _sendToServer() async {
-    if (_key.currentState.validate()) {
-      _key.currentState.save();
-      showProgress(context, 'Creating new account, Please wait...', false);
-      var profilePicUrl = '';
-      try {
-        auth.UserCredential result = await auth.FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-                email: email.trim(), password: password.trim());
-        if (_image != null) {
-          updateProgress('Uploading image, Please wait...');
-          profilePicUrl = await FireStoreUtils()
-              .uploadUserImageToFireStorage(_image, result.user.uid);
-        }
-        User user = User(
-            email: email,
-            firstName: firstName,
-            phoneNumber: mobile,
-            userID: result.user.uid,
-            active: true,
-            lastName: lastName,
-            profilePictureURL: profilePicUrl);
-        await FireStoreUtils.firestore
-            .collection(USERS)
-            .doc(result.user.uid)
-            .set(user.toJson());
-        hideProgress();
-        MyAppState.currentUser = user;
-        pushAndRemoveUntil(context, HomeScreen(user: user), false);
-      } on auth.FirebaseAuthException catch (error) {
-        hideProgress();
-        String message = 'Couldn\'t sign up';
-        switch (error.code) {
-          case 'email-already-in-use':
-            message = 'Email address already in use';
-            break;
-          case 'invalid-email':
-            message = 'validEmail';
-            break;
-          case 'operation-not-allowed':
-            message = 'Email/password accounts are not enabled';
-            break;
-          case 'weak-password':
-            message = 'password is too weak.';
-            break;
-          case 'too-many-requests':
-            message = 'Too many requests, '
-                'Please try again later.';
-            break;
-        }
-        showAlertDialog(context, 'Failed', message);
-        print(error.toString());
-      } catch (e) {
-        print('_SignUpState._sendToServer $e');
-        hideProgress();
-        showAlertDialog(context, 'Failed', 'Couldn\'t sign up');
-      }
+  _signUp() async {
+    if (_key.currentState?.validate() ?? false) {
+      _key.currentState!.save();
+      await _signUpWithEmailAndPassword();
     } else {
       setState(() {
         _validate = AutovalidateMode.onUserInteraction;
       });
+    }
+  }
+
+  _signUpWithEmailAndPassword() async {
+    await showProgress(context, 'Creating new account, Please wait...', false);
+    dynamic result = await FireStoreUtils.firebaseSignUpWithEmailAndPassword(
+      email!.trim(),
+      password!.trim(),
+      _image,
+      name!.trim(),
+    );
+    await hideProgress();
+    if (result != null && result is User) {
+      MyAppState.currentUser = result;
+      pushAndRemoveUntil(context, HomeScreen(user: result), false);
+    } else if (result != null && result is String) {
+      showAlertDialog(context, 'Failed', result);
+    } else {
+      showAlertDialog(context, 'Failed', 'Couldn\'t sign up');
     }
   }
 

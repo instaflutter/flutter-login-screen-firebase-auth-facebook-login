@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Flutter Login Kit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -42,6 +44,16 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>The app allows you to take photos and send them to your friends.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app allows you to share location with your close friends.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app allows you to send audio messages to your friends.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app allows you to send photos from your library to your friends.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app uses your photo library to upload your profile photo.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -61,15 +73,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>NSCameraUsageDescription</key>
-    <string>The app allows you to take photos and send them to your friends.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>This app uses your photo library to upload your profile photo.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app allows you to share location with your close friends.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>This app allows you to send audio messages to your friends.</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>This app allows you to send photos from your library to your friends.</string>
 </dict>
 </plist>

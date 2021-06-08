@@ -58,6 +58,32 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               });
             },
           ),
+          Visibility(
+            visible: _currentIndex + 1 == _titlesList.length,
+            child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Align(
+                  alignment: Directionality.of(context) == TextDirection.ltr
+                      ? Alignment.bottomRight
+                      : Alignment.bottomLeft,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      setFinishedOnBoarding();
+                      pushReplacement(context, AuthScreen());
+                    },
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: Colors.white),
+                        shape: StadiumBorder()),
+                  ),
+                )),
+          ),
           Padding(
             padding: const EdgeInsets.only(bottom: 50.0),
             child: Align(
@@ -102,30 +128,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           style: TextStyle(
               color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: _currentIndex + 1 == _titlesList.length
-              ? OutlineButton(
-                  onPressed: () {
-                    setFinishedOnBoarding();
-                    pushReplacement(context, new AuthScreen());
-                  },
-                  child: Text(
-                    "Get Started",
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  borderSide: BorderSide(color: Colors.white),
-                  shape: StadiumBorder(),
-                )
-              : Text(
-                  subTitle,
-                  style: TextStyle(color: Colors.white, fontSize: 14.0),
-                  textAlign: TextAlign.center,
-                ),
         ),
       ],
     );

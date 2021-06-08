@@ -1,27 +1,29 @@
 name: flutter_login_screen
 description: Functional Flutter Starter Kit
 version: 1.0.0+1
-
+publish_to: 'none'
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.13.1 <3.0.0"
 
 dependencies:
-  shared_preferences: 0.5.6
-  firebase_core: ^0.7.0
-  firebase_auth: ^0.20.1
-  cloud_firestore: ^0.16.0+1
-  progress_dialog: ^1.2.4
-  flutter_facebook_login: 3.0.0
-  http: 0.12.2
-  image_picker: ^0.6.7+22
-  firebase_storage: ^7.0.0
-  cached_network_image: ^2.5.0
-  smooth_page_indicator: ^0.2.0
+  shared_preferences: ^2.0.6
+  firebase_core: ^1.2.1
+  firebase_auth: ^1.3.0
+  cloud_firestore: ^2.2.1
+  progress_dialog:
+    git:
+      url: https://github.com/mostafaAbdelazim/progress_dialog.git
+  flutter_facebook_auth: ^3.4.1
+  http: ^0.13.3
+  image_picker: ^0.8.0+1
+  firebase_storage: ^8.1.1
+  cached_network_image: ^3.0.0
+  smooth_page_indicator: ^0.3.0-nullsafety.0
 
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.3
 
 dev_dependencies:
   flutter_test:
