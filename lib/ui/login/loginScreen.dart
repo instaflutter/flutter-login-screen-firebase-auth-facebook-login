@@ -216,7 +216,6 @@ class _LoginScreen extends State<LoginScreen> {
       } else if (result != null && result is String) {
         showAlertDialog(context, 'Error', result);
       } else {
-        print('_LoginScreen.loginWithFacebook $result');
         showAlertDialog(context, 'Error', 'Couldn\'t login with facebook.');
       }
     } catch (e, s) {
