@@ -75,7 +75,22 @@ class _HomeState extends State<HomeScreen> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            displayCircleImage(user.profilePictureURL, 80, false),
+            user.profilePictureURL == ''
+            ? CircleAvatar(
+                radius: 35,
+                backgroundColor: Colors.grey.shade400,
+                child: ClipOval(
+                  child: SizedBox(
+                    width: 70,
+                    height: 70,
+                    child: Image.asset(
+                      'assets/images/placeholder.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              )
+            :displayCircleImage(user.profilePictureURL, 80, false),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(user.name),
