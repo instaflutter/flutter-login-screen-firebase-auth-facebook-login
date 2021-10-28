@@ -1,27 +1,27 @@
-import 'dart:async';
-
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_login_screen/constants.dart';
-import 'package:flutter_login_screen/model/user.dart';
-import 'package:flutter_login_screen/services/authenticate.dart';
-import 'package:flutter_login_screen/services/helper.dart';
-import 'package:flutter_login_screen/ui/auth/authScreen.dart';
-import 'package:flutter_login_screen/ui/home/homeScreen.dart';
-import 'package:flutter_login_screen/ui/onBoarding/onBoardingScreen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_login_screen/ui/auth/authentication_bloc.dart';
+import 'package:flutter_login_screen/ui/auth/launcherScreen/launcher_screen.dart';
+import 'package:flutter_login_screen/ui/loading_cubit.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (_) => AuthenticationBloc()),
+        RepositoryProvider(create: (_) => LoadingCubit()),
+      ],
+      child: const MyApp(),
+    ));
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   MyAppState createState() => MyAppState();
 }
 
 class MyAppState extends State<MyApp> with WidgetsBindingObserver {
-  static late User? currentUser;
-
   // Set default `_initialized` and `_error` state to false
   bool _initialized = false;
   bool _error = false;
@@ -52,7 +52,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
           color: Colors.white,
           child: Center(
               child: Column(
-            children: [
+            children: const [
               Icon(
                 Icons.error_outline,
                 color: Colors.red,
@@ -73,70 +73,26 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     if (!_initialized) {
       return Container(
         color: Colors.white,
-        child: Center(
+        child: const Center(
           child: CircularProgressIndicator.adaptive(),
         ),
       );
     }
 
     return MaterialApp(
-        theme: ThemeData(accentColor: Color(COLOR_PRIMARY)),
+        theme: ThemeData(
+            snackBarTheme: const SnackBarThemeData(
+                contentTextStyle: TextStyle(color: Colors.white)),
+            colorScheme: ColorScheme.fromSwatch()
+                .copyWith(secondary: const Color(COLOR_PRIMARY))),
         debugShowCheckedModeBanner: false,
-        color: Color(COLOR_PRIMARY),
-        home: OnBoarding());
+        color: const Color(COLOR_PRIMARY),
+        home: const LauncherScreen());
   }
 
   @override
   void initState() {
     super.initState();
     initializeFlutterFire();
-  }
-}
-
-class OnBoarding extends StatefulWidget {
-  @override
-  State createState() {
-    return OnBoardingState();
-  }
-}
-
-class OnBoardingState extends State<OnBoarding> {
-  Future hasFinishedOnBoarding() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool finishedOnBoarding = (prefs.getBool(FINISHED_ON_BOARDING) ?? false);
-
-    if (finishedOnBoarding) {
-      auth.User? firebaseUser = auth.FirebaseAuth.instance.currentUser;
-      if (firebaseUser != null) {
-        User? user = await FireStoreUtils.getCurrentUser(firebaseUser.uid);
-        if (user != null) {
-          MyAppState.currentUser = user;
-          pushReplacement(context, new HomeScreen(user: user));
-        } else {
-          pushReplacement(context, new AuthScreen());
-        }
-      } else {
-        pushReplacement(context, new AuthScreen());
-      }
-    } else {
-      pushReplacement(context, new OnBoardingScreen());
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    hasFinishedOnBoarding();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator.adaptive(
-          valueColor: AlwaysStoppedAnimation(Color(COLOR_PRIMARY)),
-        ),
-      ),
-    );
   }
 }

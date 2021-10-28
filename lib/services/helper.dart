@@ -6,8 +6,8 @@ import 'package:progress_dialog/progress_dialog.dart';
 
 String? validateName(String? value) {
   String pattern = r'(^[a-zA-Z ]*$)';
-  RegExp regExp = new RegExp(pattern);
-  if (value?.length == 0) {
+  RegExp regExp = RegExp(pattern);
+  if (value?.isEmpty ?? true) {
     return "Name is required";
   } else if (!regExp.hasMatch(value ?? '')) {
     return "Name must be a-z and A-Z";
@@ -17,8 +17,8 @@ String? validateName(String? value) {
 
 String? validateMobile(String? value) {
   String pattern = r'(^\+?[0-9]*$)';
-  RegExp regExp = new RegExp(pattern);
-  if (value?.length == 0) {
+  RegExp regExp = RegExp(pattern);
+  if (value?.isEmpty ?? true) {
     return "Mobile phone number is required";
   } else if (!regExp.hasMatch(value ?? '')) {
     return "Mobile phone number must contain only digits";
@@ -27,26 +27,28 @@ String? validateMobile(String? value) {
 }
 
 String? validatePassword(String? value) {
-  if ((value?.length ?? 0) < 6)
+  if ((value?.length ?? 0) < 6) {
     return 'Password must be more than 5 characters';
-  else
+  } else {
     return null;
+  }
 }
 
 String? validateEmail(String? value) {
   String pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-  RegExp regex = new RegExp(pattern);
-  if (!regex.hasMatch(value ?? ''))
+  RegExp regex = RegExp(pattern);
+  if (!regex.hasMatch(value ?? '')) {
     return 'Enter Valid Email';
-  else
+  } else {
     return null;
+  }
 }
 
 String? validateConfirmPassword(String? password, String? confirmPassword) {
   if (password != confirmPassword) {
     return 'Password doesn\'t match';
-  } else if (confirmPassword?.length == 0) {
+  } else if (confirmPassword?.isEmpty ?? true) {
     return 'Confirm password is required';
   } else {
     return null;
@@ -57,22 +59,22 @@ String? validateConfirmPassword(String? password, String? confirmPassword) {
 late ProgressDialog progressDialog;
 
 showProgress(BuildContext context, String message, bool isDismissible) async {
-  progressDialog = new ProgressDialog(context,
+  progressDialog = ProgressDialog(context,
       type: ProgressDialogType.Normal, isDismissible: isDismissible);
   progressDialog.style(
       message: message,
       borderRadius: 10.0,
-      backgroundColor: Color(COLOR_PRIMARY),
+      backgroundColor: const Color(COLOR_PRIMARY),
       progressWidget: Container(
-        padding: EdgeInsets.all(8.0),
-        child: CircularProgressIndicator(
+        padding: const EdgeInsets.all(8.0),
+        child: const CircularProgressIndicator(
           backgroundColor: Colors.white,
           valueColor: AlwaysStoppedAnimation(Color(COLOR_PRIMARY)),
         ),
       ),
       elevation: 10.0,
       insetAnimCurve: Curves.easeInOut,
-      messageTextStyle: TextStyle(
+      messageTextStyle: const TextStyle(
           color: Colors.white, fontSize: 19.0, fontWeight: FontWeight.w600));
   await progressDialog.show();
 }
@@ -89,7 +91,7 @@ hideProgress() async {
 showAlertDialog(BuildContext context, String title, String content) {
   // set up the AlertDialog
   Widget okButton = TextButton(
-    child: Text("OK"),
+    child: const Text("OK"),
     onPressed: () {
       Navigator.pop(context);
     },
@@ -112,13 +114,13 @@ showAlertDialog(BuildContext context, String title, String content) {
 }
 
 pushReplacement(BuildContext context, Widget destination) {
-  Navigator.of(context).pushReplacement(
-      new MaterialPageRoute(builder: (context) => destination));
+  Navigator.of(context)
+      .pushReplacement(MaterialPageRoute(builder: (context) => destination));
 }
 
 push(BuildContext context, Widget destination) {
   Navigator.of(context)
-      .push(new MaterialPageRoute(builder: (context) => destination));
+      .push(MaterialPageRoute(builder: (context) => destination));
 }
 
 pushAndRemoveUntil(BuildContext context, Widget destination, bool predict) {
@@ -142,8 +144,8 @@ Widget _getPlaceholderOrErrorImage(double size, hasBorder) => Container(
       height: size,
       decoration: BoxDecoration(
         color: const Color(0xff7c94b6),
-        borderRadius: new BorderRadius.all(new Radius.circular(size / 2)),
-        border: new Border.all(
+        borderRadius: BorderRadius.all(Radius.circular(size / 2)),
+        border: Border.all(
           color: Colors.white,
           width: hasBorder ? 2.0 : 0.0,
         ),
@@ -164,8 +166,8 @@ Widget _getCircularImageProvider(
     width: size,
     height: size,
     decoration: BoxDecoration(
-        borderRadius: new BorderRadius.all(new Radius.circular(size / 2)),
-        border: new Border.all(
+        borderRadius: BorderRadius.all(Radius.circular(size / 2)),
+        border: Border.all(
           color: Colors.white,
           style: hasBorder ? BorderStyle.solid : BorderStyle.none,
           width: 1.0,
@@ -175,4 +177,46 @@ Widget _getCircularImageProvider(
           fit: BoxFit.cover,
         )),
   ));
+}
+
+bool isDarkMode(BuildContext context) {
+  if (Theme.of(context).brightness == Brightness.light) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+InputDecoration getInputDecoration(
+    {required String hint, required bool darkMode, required Color errorColor}) {
+  return InputDecoration(
+    contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+    fillColor: darkMode ? Colors.black54 : Colors.white,
+    hintText: hint,
+    focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25.0),
+        borderSide: const BorderSide(color: Color(COLOR_PRIMARY), width: 2.0)),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: errorColor),
+      borderRadius: BorderRadius.circular(25.0),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: errorColor),
+      borderRadius: BorderRadius.circular(25.0),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey.shade200),
+      borderRadius: BorderRadius.circular(25.0),
+    ),
+  );
+}
+
+showSnackBar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
 }

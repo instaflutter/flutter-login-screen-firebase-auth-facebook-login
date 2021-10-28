@@ -3,7 +3,9 @@ import 'dart:io';
 class User {
   String email;
 
-  String name;
+  String firstName;
+
+  String lastName;
 
   String userID;
 
@@ -13,26 +15,31 @@ class User {
 
   User(
       {this.email = '',
-      this.name = '',
+      this.firstName = '',
+      this.lastName = '',
       this.userID = '',
       this.profilePictureURL = ''})
-      : this.appIdentifier = 'Flutter Login Screen ${Platform.operatingSystem}';
+      : appIdentifier = 'Flutter Login Screen ${Platform.operatingSystem}';
+
+  String fullName() => '$firstName $lastName';
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
-    return new User(
+    return User(
         email: parsedJson['email'] ?? '',
-        name: parsedJson['name'] ?? '',
+        firstName: parsedJson['firstName'] ?? '',
+        lastName: parsedJson['lastName'] ?? '',
         userID: parsedJson['id'] ?? parsedJson['userID'] ?? '',
         profilePictureURL: parsedJson['profilePictureURL'] ?? '');
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'email': this.email,
-      'name': this.name,
-      'id': this.userID,
-      'profilePictureURL': this.profilePictureURL,
-      'appIdentifier': this.appIdentifier
+      'email': email,
+      'firstName': firstName,
+      'lastName': lastName,
+      'id': userID,
+      'profilePictureURL': profilePictureURL,
+      'appIdentifier': appIdentifier
     };
   }
 }
