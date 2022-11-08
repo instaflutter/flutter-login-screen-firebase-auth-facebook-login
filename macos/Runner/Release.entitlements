@@ -15,8 +15,6 @@
 	<key>com.apple.security.network.server</key>
 	<true/>
 	<key>keychain-access-groups</key>
-	<array>
-		<string>$(AppIdentifierPrefix)com.instaflutter.freeloginscreen.mac</string>
-	</array>
+	<array/>
 </dict>
 </plist>

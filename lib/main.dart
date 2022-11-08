@@ -16,7 +16,7 @@ void main() async {
       appId: facebookAppID,
       cookie: true,
       xfbml: true,
-      version: "v14.0",
+      version: "v15.0",
     );
   }
   runApp(MultiRepositoryProvider(
