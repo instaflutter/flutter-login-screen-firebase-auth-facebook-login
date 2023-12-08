@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "724928109914",
-    "project_id": "flutter-freebies",
-    "storage_bucket": "flutter-freebies.appspot.com"
+    "project_number": "374211178035",
+    "project_id": "pergamonauth",
+    "storage_bucket": "pergamonauth.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:724928109914:android:8d659462d0783cdf5b2763",
+        "mobilesdk_app_id": "1:374211178035:android:9b68d5a72adb938de93d46",
         "android_client_info": {
           "package_name": "com.instaflutter.free_login_screen"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "724928109914-6te537phcabb83rd7r4e0b0ucimlrrq4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA00kk1mEFrpbfxrKgt0WwcaviwyydyoTY"
+          "current_key": "AIzaSyCphCTbYSIpSN86gMLyS_GkQsH0QfApOHc"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "724928109914-6te537phcabb83rd7r4e0b0ucimlrrq4.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

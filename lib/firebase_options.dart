@@ -44,42 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC5vDLEY9Oi1UorTsof0Jx6TZdt1wVRfsY',
-    appId: '1:724928109914:web:363efbabeebd04fa5b2763',
-    messagingSenderId: '724928109914',
-    projectId: 'flutter-freebies',
-    authDomain: 'flutter-freebies.firebaseapp.com',
-    storageBucket: 'flutter-freebies.appspot.com',
-    measurementId: 'G-2J3B19Q48B',
+    apiKey: 'AIzaSyA7n5AduJMZhb7owqnWSvYt7W5Geb3H_fs',
+    appId: '1:374211178035:web:647df521eb296adee93d46',
+    messagingSenderId: '374211178035',
+    projectId: 'pergamonauth',
+    authDomain: 'pergamonauth.firebaseapp.com',
+    storageBucket: 'pergamonauth.appspot.com',
+    measurementId: 'G-4NF4MS0ZXL',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA00kk1mEFrpbfxrKgt0WwcaviwyydyoTY',
-    appId: '1:724928109914:android:8d659462d0783cdf5b2763',
-    messagingSenderId: '724928109914',
-    projectId: 'flutter-freebies',
-    storageBucket: 'flutter-freebies.appspot.com',
+    apiKey: 'AIzaSyCphCTbYSIpSN86gMLyS_GkQsH0QfApOHc',
+    appId: '1:374211178035:android:9b68d5a72adb938de93d46',
+    messagingSenderId: '374211178035',
+    projectId: 'pergamonauth',
+    storageBucket: 'pergamonauth.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBYvI2RbbDbqzK3UmSIlPW7QmIHKb97K6c',
-    appId: '1:724928109914:ios:c383c79f215bd1845b2763',
-    messagingSenderId: '724928109914',
-    projectId: 'flutter-freebies',
-    storageBucket: 'flutter-freebies.appspot.com',
-    iosClientId:
-        '724928109914-1adjc73c1se3jr5shdiuntaujkqgvvre.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCQftX6VWH9DMCCw5ObW_OUZtMFpnnUoek',
+    appId: '1:374211178035:ios:93b2be3b2882cbc7e93d46',
+    messagingSenderId: '374211178035',
+    projectId: 'pergamonauth',
+    storageBucket: 'pergamonauth.appspot.com',
     iosBundleId: 'com.instaflutter.freeloginscreen',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBYvI2RbbDbqzK3UmSIlPW7QmIHKb97K6c',
-    appId: '1:724928109914:ios:14570b773437fae25b2763',
-    messagingSenderId: '724928109914',
-    projectId: 'flutter-freebies',
-    storageBucket: 'flutter-freebies.appspot.com',
-    iosClientId:
-        '724928109914-g3uv4qacao8h2u7an3sdtliqe18c19mc.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCQftX6VWH9DMCCw5ObW_OUZtMFpnnUoek',
+    appId: '1:374211178035:ios:e7f4dd2042d17c85e93d46',
+    messagingSenderId: '374211178035',
+    projectId: 'pergamonauth',
+    storageBucket: 'pergamonauth.appspot.com',
     iosBundleId: 'com.instaflutter.freeloginscreen.mac',
   );
 }
